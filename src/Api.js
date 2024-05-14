@@ -8,13 +8,14 @@ export const trending = async () => {
     },
   };
 
-  const result = fetch(
+  const result = await fetch(
     'https://api.themoviedb.org/3/trending/all/day?language=en-US',
     options
   )
     .then(response => response.json())
     .then(response => response.results)
     .catch(err => console.error(err));
+  console.log(result);
   return result;
 };
 export const search = key_word => {
