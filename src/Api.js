@@ -13,7 +13,7 @@ export const trending = async () => {
     options
   )
     .then(response => response.json())
-    .then(response => console.log(response))
+    .then(response => response.results)
     .catch(err => console.error(err));
   return result;
 };
