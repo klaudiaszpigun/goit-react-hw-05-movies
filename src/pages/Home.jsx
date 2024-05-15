@@ -1,21 +1,32 @@
 import { trending } from 'Api';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+
 const Home = () => {
-  const trendingMovies = trending();
-  console.log(trendingMovies.title);
+  const [trendingMovies, setTrendingMovies] = useState([]);
+
+  useEffect(() => {
+    const fetchTrendingMovies = async () => {
+      const movies = await trending();
+      const filteredMovies = movies.filter(movie => movie.title);
+      setTrendingMovies(filteredMovies);
+    };
+
+    fetchTrendingMovies();
+  }, []);
+
   return (
     <div>
       <h1>Trending today:</h1>
       <ul>
-        {trendingMovies.map(movie => {
-          return (
-            <li>
-              <Link to={`./movie/:{movie.id}`}>{movie.title}</Link>
-            </li>
-          );
-        })}
+        {trendingMovies.map(movie => (
+          <li key={movie.id}>
+            <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+          </li>
+        ))}
       </ul>
     </div>
   );
 };
+
 export default Home;

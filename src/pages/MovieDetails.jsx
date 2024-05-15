@@ -5,7 +5,9 @@ export const MovieDetails = () => {
     'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
   const location = useLocation();
   const id = location.state;
+
   const movieDetails = details(id);
+  console.log(movieDetails);
   return (
     <>
       <div>

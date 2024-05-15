@@ -15,7 +15,6 @@ export const trending = async () => {
     .then(response => response.json())
     .then(response => response.results)
     .catch(err => console.error(err));
-  console.log(result);
   return result;
 };
 export const search = key_word => {
@@ -74,7 +73,7 @@ export const credits = movie_id => {
     options
   )
     .then(response => response.json())
-    .then(response => console.log(response))
+    .then(response => response.results)
     .catch(err => console.error(err));
   return result;
 };
@@ -94,7 +93,7 @@ export const reviews = movie_id => {
     options
   )
     .then(response => response.json())
-    .then(response => console.log(response))
+    .then(response => response.results)
     .catch(err => console.error(err));
   return result;
 };
