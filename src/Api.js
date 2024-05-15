@@ -38,7 +38,7 @@ export const search = key_word => {
   return result;
 };
 
-export const details = movie_id => {
+export const details = id => {
   const options = {
     method: 'GET',
     headers: {
@@ -49,12 +49,13 @@ export const details = movie_id => {
   };
 
   const result = fetch(
-    `https://api.themoviedb.org/3/movie/${movie_id}?language=en-US`,
+    `https://api.themoviedb.org/3/movie/${id}?language=en-US`,
     options
   )
     .then(response => response.json())
     .then(response => response.results)
     .catch(err => console.error(err));
+  console.log(result);
   return result;
 };
 

@@ -1,18 +1,24 @@
 import { useState } from 'react';
 import { SearchedMovies } from '../components/SearchedMovies';
-export const Search = () => {
+const Movies = () => {
   const [temporaryQuery, setTemporaryQuery] = useState('');
   const [query, setQuery] = useState('');
+  const handleClick = event => {
+    event.preventDefault();
+    setQuery(temporaryQuery);
+  };
   return (
-    <>
-      <form onSubmit={() => setQuery(temporaryQuery)}>
-        <input
-          type="text"
-          onChange={event => setTemporaryQuery(event.target.value)}
-        />
-        <button type="submit">search</button>
-      </form>
+    <div>
+      <input
+        type="text"
+        onChange={event => setTemporaryQuery(event.target.value)}
+      />
+      <button type="submit" onClick={handleClick}>
+        search
+      </button>
+
       <SearchedMovies query={query} />
-    </>
+    </div>
   );
 };
+export default Movies;
