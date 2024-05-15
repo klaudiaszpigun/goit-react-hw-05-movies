@@ -1,7 +1,8 @@
 import { trending } from 'Api';
 import { Link } from 'react-router-dom';
-export const Home = () => {
+const Home = () => {
   const trendingMovies = trending();
+  console.log(trendingMovies.title);
   return (
     <div>
       <h1>Trending today:</h1>
@@ -17,3 +18,4 @@ export const Home = () => {
     </div>
   );
 };
+export default Home;

@@ -33,7 +33,7 @@ export const search = key_word => {
     options
   )
     .then(response => response.json())
-    .then(response => console.log(response))
+    .then(response => response.results)
     .catch(err => console.error(err));
 
   return result;
@@ -54,7 +54,7 @@ export const details = movie_id => {
     options
   )
     .then(response => response.json())
-    .then(response => console.log(response))
+    .then(response => response.results)
     .catch(err => console.error(err));
   return result;
 };

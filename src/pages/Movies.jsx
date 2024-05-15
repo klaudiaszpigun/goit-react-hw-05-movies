@@ -1,1 +1,5 @@
-export const Movies = () => {};
+import { Search } from 'components/Search';
+
+export const Movies = () => {
+  return <Search />;
+};
