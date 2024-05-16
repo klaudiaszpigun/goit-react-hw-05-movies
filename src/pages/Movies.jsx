@@ -8,17 +8,19 @@ const Movies = () => {
     setQuery(temporaryQuery);
   };
   return (
-    <div>
-      <input
-        type="text"
-        onChange={event => setTemporaryQuery(event.target.value)}
-      />
-      <button type="submit" onClick={handleClick}>
-        search
-      </button>
+    <>
+      <div>
+        <input
+          type="text"
+          onChange={event => setTemporaryQuery(event.target.value)}
+        />
+        <button type="submit" onClick={handleClick}>
+          search
+        </button>
 
-      <SearchedMovies query={query} />
-    </div>
+        <SearchedMovies query={query} />
+      </div>
+    </>
   );
 };
 export default Movies;

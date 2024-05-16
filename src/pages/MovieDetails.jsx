@@ -1,12 +1,11 @@
 import { details } from 'Api';
 import { useEffect, useState } from 'react';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
-export const MovieDetails = () => {
-  const { id } = useParams();
+const MovieDetails = () => {
   const navigate = useNavigate();
   const [detailsObject, setDetailsObject] = useState(null);
+  const { id } = useParams();
   console.log(id);
-  console.log(detailsObject);
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -25,7 +24,7 @@ export const MovieDetails = () => {
     return <div>Loading...</div>;
   }
   const handleClick = () => {
-    navigate('/');
+    navigate('/movies');
   };
 
   return (
@@ -54,3 +53,4 @@ export const MovieDetails = () => {
     </>
   );
 };
+export default MovieDetails;

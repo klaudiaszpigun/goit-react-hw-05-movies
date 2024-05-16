@@ -55,7 +55,7 @@ export const details = id => {
     .then(response => response.json())
     .then(response => response.results)
     .catch(err => console.error(err));
-  console.log(result);
+
   return result;
 };
 
