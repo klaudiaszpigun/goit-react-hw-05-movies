@@ -53,13 +53,12 @@ export const details = id => {
     options
   )
     .then(response => response.json())
-    .then(response => response.results)
     .catch(err => console.error(err));
 
   return result;
 };
 
-export const credits = movie_id => {
+export const credits = id => {
   const options = {
     method: 'GET',
     headers: {
@@ -70,11 +69,10 @@ export const credits = movie_id => {
   };
 
   const result = fetch(
-    `https://api.themoviedb.org/3/movie/${movie_id}?language=en-US`,
+    `https://api.themoviedb.org/3/movie/${id}?language=en-US`,
     options
   )
     .then(response => response.json())
-    .then(response => response.results)
     .catch(err => console.error(err));
   return result;
 };

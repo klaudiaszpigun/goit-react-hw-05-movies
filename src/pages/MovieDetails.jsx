@@ -1,31 +1,37 @@
 import { details } from 'Api';
-import { useEffect, useState } from 'react';
-import { Outlet, useNavigate, useParams } from 'react-router-dom';
+import { Suspense, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import Cast from './Cast';
 const MovieDetails = () => {
   const navigate = useNavigate();
-  const [detailsObject, setDetailsObject] = useState(null);
   const { id } = useParams();
-  console.log(id);
+  const [detailsObject, setDetailsObject] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
-      const movieDetails = await details(id);
-      setDetailsObject(movieDetails);
+      try {
+        const movieDetails = await details(id);
+        setDetailsObject(movieDetails);
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error fetching movie details:', error);
+        setIsLoading(false);
+      }
     };
-
     fetchMovieDetails();
   }, [id]);
 
-  console.log(detailsObject);
   const defaultImg =
-    'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
+    'https://t3.ftcdn.net/jpg/05/65/84/38/360_F_565843812_cBZocRJmgxP7NgHRZvOO27nYX20Lx5bz.jpg';
 
-  if (!detailsObject) {
-    return <div>Loading...</div>;
-  }
   const handleClick = () => {
     navigate('/movies');
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
@@ -35,21 +41,28 @@ const MovieDetails = () => {
         </button>
       </div>
       <div>
-        <img src={detailsObject.poster_path ?? defaultImg} alt="poster" />
+        <img
+          src={
+            detailsObject.poster_path
+              ? `https://image.tmdb.org/t/p/w342${detailsObject.poster_path}`
+              : defaultImg
+          }
+          alt="poster"
+        />
         <h2>{detailsObject.title}</h2>
-        <p>User score: {detailsObject.popularity?.slice(0, 3)}</p>
+        <p>User score: {detailsObject.vote_average}</p>
         <h3>Overview</h3>
         <p>{detailsObject.overview}</p>
         <h3>Genres</h3>
         <ul>
           {detailsObject.genres.map(genre => (
-            <li key={genre.id}>
-              <p>{genre.name}</p>
-            </li>
+            <li key={genre.id}>{genre.name}</li>
           ))}
         </ul>
       </div>
-      <Outlet />
+      <Suspense fallback={<div>Loading Cast and Reviews...</div>}>
+        <Cast />
+      </Suspense>
     </>
   );
 };
