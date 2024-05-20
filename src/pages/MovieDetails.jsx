@@ -2,6 +2,7 @@ import { details } from 'Api';
 import { Suspense, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Cast from './Cast';
+import Reviews from './Reviews';
 const MovieDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -62,6 +63,7 @@ const MovieDetails = () => {
       </div>
       <Suspense fallback={<div>Loading Cast and Reviews...</div>}>
         <Cast />
+        <Reviews />
       </Suspense>
     </>
   );

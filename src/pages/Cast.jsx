@@ -2,31 +2,30 @@ import { credits } from 'Api';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 const Cast = () => {
-  const { id } = useParams(); // dziala
-  const [cast, setCast] = useState([]); // nie dziala
-  const [isLoading, setIsLoading] = useState(true);
-  console.log(id);
+  const { id } = useParams();
+  const [cast, setCast] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchingCast = async () => {
       try {
         const fetched = await credits(id);
-        setCast(fetched.cast);
-        setIsLoading(false);
+        setCast(fetched);
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching movie details:', error);
-        setIsLoading(false);
+        setLoading(true);
       }
     };
 
     fetchingCast();
   }, [id]);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
+  if (loading) {
+    <div>Loading...</div>;
   }
   if (!cast) {
-    return <div>Loading...</div>;
+    return <div>There's no data</div>;
   }
   return (
     <ul>

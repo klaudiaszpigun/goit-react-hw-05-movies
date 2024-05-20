@@ -69,15 +69,16 @@ export const credits = id => {
   };
 
   const result = fetch(
-    `https://api.themoviedb.org/3/movie/${id}?language=en-US`,
+    `https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`,
     options
   )
     .then(response => response.json())
+    .then(response => response.cast)
     .catch(err => console.error(err));
   return result;
 };
 
-export const reviews = movie_id => {
+export const fetchingReviews = id => {
   const options = {
     method: 'GET',
     headers: {
@@ -88,7 +89,7 @@ export const reviews = movie_id => {
   };
 
   const result = fetch(
-    `https://api.themoviedb.org/3/movie/${movie_id}/reviews?language=en-US&page=1`,
+    `https://api.themoviedb.org/3/movie/${id}/reviews?language=en-US`,
     options
   )
     .then(response => response.json())
