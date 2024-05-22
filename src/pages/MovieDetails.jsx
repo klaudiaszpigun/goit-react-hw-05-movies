@@ -27,7 +27,7 @@ const MovieDetails = () => {
     'https://t3.ftcdn.net/jpg/05/65/84/38/360_F_565843812_cBZocRJmgxP7NgHRZvOO27nYX20Lx5bz.jpg';
 
   const handleClick = () => {
-    navigate('/goit-react-hw-05-movies/movies');
+    navigate('/');
   };
 
   if (isLoading) {
